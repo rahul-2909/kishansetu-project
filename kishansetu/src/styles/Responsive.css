@@ -1,0 +1,463 @@
+/* Global responsive overrides */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+@media (max-width: 1200px) {
+  .navbar-inner,
+  .categories-inner,
+  .how-inner,
+  .why-inner,
+  .testimonials-inner,
+  .footer-inner {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .hero-container {
+    gap: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .hero-heading,
+  .cta-title {
+    max-width: 100%;
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .why-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-grid {
+    gap: 32px;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero {
+    min-height: auto;
+    padding-top: 88px;
+    padding-bottom: 48px;
+  }
+
+  .hero-container,
+  .spotlight-inner {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+
+  .hero-container {
+    align-items: center;
+  }
+
+  .hero-content,
+  .spotlight-content {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .hero-heading {
+    font-size: 40px;
+  }
+
+  .hero-subtext,
+  .spotlight-intro,
+  .cta-subtitle {
+    max-width: 100%;
+  }
+
+  .hero-image-wrapper {
+    max-width: 100%;
+  }
+
+  .spotlight-shell {
+    width: min(100%, calc(100% - 40px));
+  }
+
+  .spotlight-image-card {
+    min-height: 520px;
+  }
+
+  .categories-header,
+  .footer-bottom {
+    gap: 16px;
+  }
+
+  .how-steps {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .how-step-wrapper {
+    flex-direction: column;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .how-connector {
+    width: auto;
+    height: 44px;
+    padding-bottom: 0;
+    transform: rotate(90deg);
+  }
+
+  .login-brand,
+  .signup-brand {
+    flex-basis: 44%;
+  }
+
+  .login-brand-content,
+  .signup-brand-content {
+    padding: 48px 40px;
+  }
+
+  .login-brand-heading,
+  .signup-brand-heading {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-inner,
+  .categories-inner,
+  .how-inner,
+  .why-inner,
+  .testimonials-inner,
+  .footer-inner,
+  .cta-content,
+  .hero-container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .hero,
+  .categories,
+  .how-it-works,
+  .why-us,
+  .testimonials,
+  .spotlight,
+  .cta {
+    overflow: hidden;
+  }
+
+  .hero {
+    padding-top: 84px;
+  }
+
+  .hero-heading {
+    font-size: 34px;
+  }
+
+  .hero-buttons,
+  .cta-buttons,
+  .login-socials,
+  .signup-socials,
+  .mobile-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-buttons .btn,
+  .cta-btn,
+  .mobile-buttons .btn-nav,
+  .login-submit,
+  .signup-submit,
+  .social-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-trust {
+    gap: 16px;
+  }
+
+  .trust-item {
+    width: calc(50% - 8px);
+    justify-content: center;
+  }
+
+  .floating-card {
+    max-width: calc(100% - 32px);
+  }
+
+  .categories-grid,
+  .why-grid,
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .categories-view-all {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .spotlight-shell {
+    width: calc(100% - 24px);
+  }
+
+  .spotlight-image-card {
+    min-height: 420px;
+  }
+
+  .spotlight-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-trust {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-brand,
+  .footer-col:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .login-container,
+  .signup-container {
+    flex-direction: column;
+  }
+
+  .login-brand,
+  .signup-brand {
+    display: none;
+  }
+
+  .login-form-side,
+  .signup-form-side {
+    min-height: 100dvh;
+    padding: 24px;
+  }
+
+  .login-form-wrapper,
+  .signup-form-wrapper {
+    max-width: 100%;
+  }
+
+  .login-mobile-logo,
+  .signup-mobile-logo {
+    display: flex;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-inner,
+  .categories-inner,
+  .how-inner,
+  .why-inner,
+  .testimonials-inner,
+  .footer-inner,
+  .cta-content,
+  .hero-container,
+  .login-form-side,
+  .signup-form-side {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .navbar-logo-text,
+  .footer-logo-text {
+    font-size: 18px;
+  }
+
+  .mobile-menu {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero-heading,
+  .cta-title,
+  .how-title,
+  .why-title,
+  .testimonials-title,
+  .categories-title {
+    font-size: 26px;
+  }
+
+  .hero-subtext,
+  .cta-subtitle,
+  .categories-subtitle,
+  .how-subtitle,
+  .why-subtitle,
+  .testimonials-subtitle {
+    font-size: 14px;
+  }
+
+  .hero-trust {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .trust-item {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .hero-image-container {
+    max-width: 100%;
+  }
+
+  .hero-image,
+  .hero-image-bg {
+    border-radius: 20px;
+  }
+
+  .floating-card {
+    position: static;
+    margin-top: 12px;
+    width: 100%;
+    max-width: 100%;
+    animation: none;
+  }
+
+  .hero-image-container {
+    display: grid;
+    gap: 12px;
+  }
+
+  .card-top,
+  .card-bottom {
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+  }
+
+  .categories-grid,
+  .why-grid,
+  .testimonials-grid,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-card,
+  .why-card,
+  .testimonial-card,
+  .how-step {
+    border-radius: 18px;
+  }
+
+  .spotlight-shell {
+    width: calc(100% - 20px);
+  }
+
+  .spotlight-image-card {
+    min-height: 340px;
+    border-radius: 22px;
+  }
+
+  .spotlight-exp-badge,
+  .spotlight-harvest-card {
+    position: static;
+    max-width: 100%;
+    margin: 12px;
+  }
+
+  .spotlight-image-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .spotlight-image {
+    position: absolute;
+  }
+
+  .spotlight-identity {
+    align-items: flex-start;
+  }
+
+  .spotlight-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+  }
+
+  .cta-badge {
+    font-size: 12px;
+  }
+
+  .cta-btn {
+    padding: 13px 16px;
+    font-size: 14px;
+  }
+
+  .cta-btn-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .footer-bottom,
+  .login-form-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-bottom {
+    text-align: left;
+  }
+
+  .login-role-toggle .role-option,
+  .signup-role-toggle .role-option {
+    padding: 10px 8px;
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  .login-role-toggle .role-option svg,
+  .signup-role-toggle .role-option svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .input-wrapper {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .input-field {
+    min-width: 0;
+    font-size: 14px;
+  }
+
+  .password-strength {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .strength-label {
+    min-width: 0;
+    text-align: left;
+  }
+}
