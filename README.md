@@ -1,6 +1,5 @@
-👇
 
-🌾 Kishansetu – Farmer to Buyer Marketplace
+🌾 #Kishansetu – Farmer to Buyer Marketplace
 
 Kishansetu is a full-stack MERN web application that connects farmers directly with buyers, eliminating intermediaries. The platform allows farmers to showcase their products and buyers to directly contact them, ensuring transparency, fair pricing, and fresh produce access.
 
