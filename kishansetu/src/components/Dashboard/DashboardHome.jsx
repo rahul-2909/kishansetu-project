@@ -147,12 +147,10 @@
 // export default DashboardHome;
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 import { apiUrl } from '../../config/api';
 
 const DashboardHome = () => {
-  const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -167,6 +165,9 @@ const DashboardHome = () => {
         });
 
         const statsData = await statsRes.json();
+        if (!statsRes.ok) {
+          throw new Error(statsData.message || 'Failed to load dashboard');
+        }
 
         setStats(statsData);
         console.log('Dashboard stats loaded:', statsData);
@@ -209,7 +210,7 @@ const DashboardHome = () => {
     },
     {
       title: 'Your Location',
-      value: stats.location.split(',')[0] || 'Not Set',
+      value: stats.location?.split(',')[0] || 'Not Set',
       icon: '📍',
       color: '#d97706',
       bg: 'rgba(210, 119, 6, 0.08)'

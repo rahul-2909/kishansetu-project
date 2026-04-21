@@ -20,6 +20,7 @@ const LocationSettings = () => {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Failed to fetch location');
         setForm({
           village: data.village || '',
           city: data.city || '',
@@ -27,6 +28,7 @@ const LocationSettings = () => {
         });
       } catch (err) {
         console.error(err);
+        setMessage(err.message || 'Failed to fetch location');
       }
     };
     fetchLocation();

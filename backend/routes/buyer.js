@@ -27,8 +27,8 @@ router.put('/profile', async (req, res) => {
     const user = await User.findById(req.user.id);
     if (!user) return res.status(404).json({ message: 'User not found' });
 
-    if (fullName) user.fullName = fullName;
-    if (phone) user.phone = phone;
+    if (fullName !== undefined) user.fullName = fullName;
+    if (phone !== undefined) user.phone = phone;
 
     await user.save();
 

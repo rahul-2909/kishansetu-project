@@ -42,9 +42,9 @@ router.put('/profile', async (req, res) => {
         const user = await User.findById(req.user.id);
         if (!user) return res.status(404).json({ message: 'User not found' });
 
-        if (fullName) user.fullName = fullName;
-        if (phone) user.phone = phone;
-        if (description) user.description = description;
+        if (fullName !== undefined) user.fullName = fullName;
+        if (phone !== undefined) user.phone = phone;
+        if (description !== undefined) user.description = description;
 
         await user.save();
         res.json({ message: 'Profile updated successfully', user });
@@ -72,9 +72,9 @@ router.put('/location', async (req, res) => {
         const user = await User.findById(req.user.id);
         if (!user) return res.status(404).json({ message: 'User not found' });
 
-        if (village) user.village = village;
-        if (city) user.city = city;
-        if (state) user.state = state;
+        if (village !== undefined) user.village = village;
+        if (city !== undefined) user.city = city;
+        if (state !== undefined) user.state = state;
 
         await user.save();
 

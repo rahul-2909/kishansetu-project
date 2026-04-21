@@ -22,6 +22,7 @@ const Profile = () => {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Failed to fetch profile');
         setForm({
           fullName: data.fullName || '',
           phone: data.phone || '',
@@ -29,6 +30,7 @@ const Profile = () => {
         });
       } catch (err) {
         console.error(err);
+        setMessage(err.message || 'Failed to fetch profile');
       }
     };
     fetchProfile();
