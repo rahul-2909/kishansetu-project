@@ -93,7 +93,25 @@ const FarmerPublicProfile = () => {
           <div className="public-products-grid">
             {products.map((item, index) => (
               <div key={index} className="public-product-item">
-                <span className="public-product-img">{item.name?.charAt(0).toUpperCase() || '🌾'}</span>
+                <div className="public-product-img">
+                  {item.image ? (
+                    <img 
+                      src={item.image} 
+                      alt={item.name}
+                      className="product-image"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.nextElementSibling.style.display = 'flex';
+                      }}
+                    />
+                  ) : null}
+                  <span 
+                    className="product-emoji-fallback"
+                    style={{ display: item.image ? 'none' : 'flex' }}
+                  >
+                    {item.name?.charAt(0).toUpperCase() || '🌾'}
+                  </span>
+                </div>
                 <div className="public-product-details">
                   <span className="public-product-name">{item.name}</span>
                   <span className="public-product-price">₹{item.price}{item.quantity ? ` • ${item.quantity}` : ''}</span>

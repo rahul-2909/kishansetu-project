@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Topbar = () => {
+const Topbar = ({ isSidebarOpen, onToggleSidebar }) => {
   const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem('farmdirect_user')) || {};
@@ -15,6 +15,17 @@ const Topbar = () => {
   return (
     <header className="topbar">
       <div className="topbar-left">
+        <button
+          type="button"
+          className="sidebar-toggle"
+          aria-label={isSidebarOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isSidebarOpen}
+          onClick={onToggleSidebar}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
         <h2 className="topbar-title">Kishansetu Panell</h2>
       </div>
 

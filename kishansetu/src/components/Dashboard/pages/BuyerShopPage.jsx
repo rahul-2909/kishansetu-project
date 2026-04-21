@@ -64,6 +64,10 @@ const BuyerShopPage = () => {
         </Link>
 
         <div className="buyer-topbar-right">
+          <Link to="/" className="buyer-home-btn">
+            Home
+          </Link>
+
           <Link to="/buyer/profile" className="buyer-profile-btn">
             <div className="buyer-topbar-avatar">
               {user.fullName ? user.fullName.charAt(0).toUpperCase() : 'B'}

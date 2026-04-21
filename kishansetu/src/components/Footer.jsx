@@ -18,7 +18,7 @@ const Footer = () => {
           <div className="footer-brand">
             <div className="footer-logo">
               <span className="footer-logo-icon">🌱</span>
-              <span className="footer-logo-text">FarmDirect</span>
+              <span className="footer-logo-text">Kishansetu</span>
             </div>
             <p className="footer-brand-text">
               Connecting local farmers directly with buyers.
@@ -100,7 +100,7 @@ const Footer = () => {
                     <polyline points="22,6 12,13 2,6" />
                   </svg>
                 </span>
-                hello@farmdirect.in
+                hello@Kishansetu.in
               </li>
               <li>
                 <span className="footer-contact-icon">
@@ -118,7 +118,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="footer-bottom">
           <p className="footer-copyright">
-            © {currentYear} FarmDirect. All rights reserved.
+            © {currentYear} Kishansetu. All rights reserved.
           </p>
           <p className="footer-made">
             Made with <span className="footer-heart">❤️</span> for Indian farmers

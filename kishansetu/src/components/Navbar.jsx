@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Navbar.css';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  
+  // Get user from localStorage
+  const user = JSON.parse(localStorage.getItem('farmdirect_user') || '{}');
+  const token = localStorage.getItem('farmdirect_token');
+  const isLoggedIn = !!token;
 
   const closeMenu = () => setIsMenuOpen(false);
 
@@ -14,6 +20,22 @@ const Navbar = () => {
       const offset = 80;
       const top = element.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top, behavior: 'smooth' });
+    }
+    closeMenu();
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('farmdirect_token');
+    localStorage.removeItem('farmdirect_user');
+    navigate('/');
+    closeMenu();
+  };
+
+  const handleDashboardClick = () => {
+    if (user.role === 'seller') {
+      navigate('/seller/dashboard');
+    } else if (user.role === 'buyer') {
+      navigate('/buyer/shop');
     }
     closeMenu();
   };
@@ -36,8 +58,24 @@ const Navbar = () => {
         </ul>
 
         <div className="navbar-actions">
-          <Link to="/login" className="btn-nav btn-ghost">Log in</Link>
-          <Link to="/signup" className="btn-nav btn-solid">Sign up</Link>
+          {isLoggedIn ? (
+            <>
+              {/* <span className="navbar-user-info">
+                {user.name} ({user.role === 'seller' ? 'Seller' : 'Buyer'})
+              </span> */}
+              <button className="btn-nav btn-primary" onClick={handleDashboardClick}>
+                {user.role === 'seller' ? 'My Dashboard' : 'Shop'}
+              </button>
+              <button className="btn-nav btn-ghost" onClick={handleLogout}>
+                Log out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="btn-nav btn-ghost">Log in</Link>
+              <Link to="/signup" className="btn-nav btn-solid">Sign up</Link>
+            </>
+          )}
         </div>
 
         <button className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
@@ -61,8 +99,24 @@ const Navbar = () => {
           <a href="#why-us" onClick={(e) => scrollToSection(e, 'why-us')}>Why Us</a>
           <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')}>Contact</a>
           <div className="mobile-buttons">
-            <Link to="/login" className="btn-nav btn-ghost" onClick={closeMenu}>Log in</Link>
-            <Link to="/signup" className="btn-nav btn-solid" onClick={closeMenu}>Sign up</Link>
+            {isLoggedIn ? (
+              <>
+                {/* <span className="navbar-user-info-mobile">
+                  {user.name} ({user.role === 'seller' ? 'Seller' : 'Buyer'})
+                </span> */}
+                <button className="btn-nav btn-primary" onClick={handleDashboardClick}>
+                  {user.role === 'seller' ? 'My Dashboard' : 'Shop'}
+                </button>
+                <button className="btn-nav btn-ghost" onClick={handleLogout}>
+                  Log out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/login" className="btn-nav btn-ghost" onClick={closeMenu}>Log in</Link>
+                <Link to="/signup" className="btn-nav btn-solid" onClick={closeMenu}>Sign up</Link>
+              </>
+            )}
           </div>
         </div>
       )}

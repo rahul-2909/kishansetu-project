@@ -131,6 +131,39 @@ router.post('/products', upload.single('image'), async (req, res) => {
     }
 });
 
+// UPDATE PRODUCT
+router.put('/products/:id', upload.single('image'), async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+
+        if (product.seller.toString() !== req.user.id.toString()) {
+            return res.status(401).json({ message: 'Not authorized' });
+        }
+
+        product.name = req.body.name || product.name;
+        product.category = req.body.category || product.category;
+        product.price = req.body.price !== undefined ? Number(req.body.price) : product.price;
+        product.quantity = req.body.quantity !== undefined ? req.body.quantity : product.quantity;
+
+        if (req.file) {
+            product.image = req.file.path;
+        }
+
+        await product.save();
+
+        res.json({
+            message: 'Product updated successfully!',
+            product
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message || 'Failed to update product' });
+    }
+});
+
 // DELETE PRODUCT
 router.delete('/products/:id', async (req, res) => {
     try {

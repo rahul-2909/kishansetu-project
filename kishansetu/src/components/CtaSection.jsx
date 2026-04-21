@@ -1,7 +1,9 @@
 import React from 'react';
 import '../styles/CtaSection.css';
+import { useNavigate } from "react-router-dom";
 
 const CtaSection = () => {
+  const navigate = useNavigate();
   return (
     <section className="cta">
       <div className="cta-inner">
@@ -23,7 +25,7 @@ const CtaSection = () => {
           </p>
 
           <div className="cta-buttons">
-            <button className="cta-btn cta-btn-white">
+            <button className="cta-btn cta-btn-white" onClick={() => navigate("/buyer/shop")}>
               <span className="cta-btn-icon">
                 <svg
                   width="20"
@@ -58,7 +60,7 @@ const CtaSection = () => {
               </span>
             </button>
 
-            <button className="cta-btn cta-btn-outline">
+            <button className="cta-btn cta-btn-outline" onClick={() => navigate("/seller/dashboard")}>
               <span className="cta-btn-icon">
                 <svg
                   width="20"

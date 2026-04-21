@@ -20,6 +20,49 @@ canvas {
   max-width: 100%;
 }
 
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+.navbar,
+.hero,
+.categories,
+.how-it-works,
+.why-us,
+.spotlight,
+.testimonials,
+.cta,
+.footer,
+.buyer-page-wrapper,
+.dashboard-layout {
+  width: 100%;
+  overflow-x: clip;
+}
+
+.hero-heading,
+.cta-title,
+.how-title,
+.why-title,
+.testimonials-title,
+.categories-title,
+.buyer-header h1,
+.public-info h1,
+.buyer-profile-header h1,
+.topbar-title,
+.home-welcome {
+  overflow-wrap: anywhere;
+}
+
+.buyer-filters,
+.mobile-menu,
+.product-actions,
+.buyer-profile-actions,
+.topbar-right {
+  max-width: 100%;
+}
+
 @media (max-width: 1200px) {
   .navbar-inner,
   .categories-inner,
@@ -269,6 +312,32 @@ canvas {
   .signup-mobile-logo {
     display: flex;
   }
+
+  .buyer-topbar,
+  .topbar {
+    height: auto;
+    min-height: 64px;
+  }
+
+  .buyer-topbar,
+  .buyer-topbar-right,
+  .buyer-profile-btn,
+  .buyer-profile-header,
+  .buyer-profile-actions {
+    flex-wrap: wrap;
+  }
+
+  .buyer-profile-btn span,
+  .topbar-home-btn span {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .public-profile-header,
+  .public-product-item,
+  .farmer-card-meta {
+    min-width: 0;
+  }
 }
 
 @media (max-width: 576px) {
@@ -459,5 +528,31 @@ canvas {
   .strength-label {
     min-width: 0;
     text-align: left;
+  }
+
+  .buyer-topbar,
+  .topbar {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .buyer-topbar-right,
+  .topbar-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .buyer-profile-btn,
+  .buyer-logout-btn,
+  .topbar-home-btn,
+  .topbar-logout {
+    min-height: 40px;
+  }
+
+  .buyer-search-bar input,
+  .product-name,
+  .buyer-detail-value,
+  .preview-phone-big {
+    overflow-wrap: anywhere;
   }
 }

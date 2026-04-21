@@ -1,16 +1,17 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Buyer.css';
+import { useToast } from '../../Toast';
 
 const BuyerProfile = () => {
   const navigate = useNavigate();
+  const { showError, showSuccess } = useToast();
   const initialUser = JSON.parse(localStorage.getItem('farmdirect_user')) || {};
   const [user, setUser] = useState(initialUser);
   const [form, setForm] = useState({ fullName: initialUser.fullName || '', phone: initialUser.phone || '' });
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
+  const [validationErrors, setValidationErrors] = useState({});
 
   const fetchProfile = async () => {
     const token = localStorage.getItem('farmdirect_token');
@@ -32,10 +33,9 @@ const BuyerProfile = () => {
       setUser(data);
       setForm({ fullName: data.fullName || '', phone: data.phone || '' });
       localStorage.setItem('farmdirect_user', JSON.stringify(data));
-      setError('');
     } catch (err) {
       console.error(err);
-      setError(err.message);
+      showError(err.message);
     } finally {
       setLoading(false);
     }
@@ -54,13 +54,27 @@ const BuyerProfile = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+    setValidationErrors((prev) => ({ ...prev, [name]: '' }));
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    if (!form.fullName || form.fullName.trim().length === 0) errors.fullName = 'Full name is required';
+    if (!form.phone || form.phone.trim().length === 0) errors.phone = 'Phone number is required';
+    if (form.phone && !/^[6-9]\d{9}$/.test(form.phone.trim())) errors.phone = 'Enter a valid 10-digit phone number';
+    
+    setValidationErrors(errors);
+    return Object.keys(errors).length === 0;
   };
 
   const handleSave = async () => {
+    if (!validateForm()) {
+      showError('Please fix the errors below');
+      return;
+    }
+
     const token = localStorage.getItem('farmdirect_token');
     if (!token) return;
-    setMessage('');
-    setError('');
 
     try {
       const response = await fetch('http://localhost:5000/api/buyer/profile', {
@@ -69,7 +83,7 @@ const BuyerProfile = () => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ fullName: form.fullName, phone: form.phone }),
+        body: JSON.stringify({ fullName: form.fullName.trim(), phone: form.phone.trim() }),
       });
       const data = await response.json();
       if (!response.ok) {
@@ -79,11 +93,11 @@ const BuyerProfile = () => {
       setUser(data.user);
       setForm({ fullName: data.user.fullName || '', phone: data.user.phone || '' });
       localStorage.setItem('farmdirect_user', JSON.stringify(data.user));
-      setMessage(data.message || 'Profile updated successfully');
+      showSuccess(data.message || 'Profile updated successfully');
       setIsEditing(false);
     } catch (err) {
       console.error(err);
-      setError(err.message);
+      showError(err.message);
     }
   };
 
@@ -128,9 +142,6 @@ const BuyerProfile = () => {
             </div>
           </div>
 
-          {error && <p style={{ color: 'red', marginBottom: '16px' }}>{error}</p>}
-          {message && <p style={{ color: '#16a34a', marginBottom: '16px' }}>{message}</p>}
-
           <div className="buyer-profile-details">
             <div className="buyer-detail-item">
               <span className="buyer-detail-label">Email Address</span>
@@ -144,27 +155,33 @@ const BuyerProfile = () => {
 
             {isEditing ? (
               <div className="buyer-profile-edit-grid">
-                <label className="buyer-detail-label" htmlFor="fullName">
-                  Full Name
-                </label>
-                <input
-                  id="fullName"
-                  name="fullName"
-                  value={form.fullName}
-                  onChange={handleChange}
-                  className="buyer-input"
-                />
+                <div>
+                  <label className="buyer-detail-label" htmlFor="fullName">
+                    Full Name
+                  </label>
+                  <input
+                    id="fullName"
+                    name="fullName"
+                    value={form.fullName}
+                    onChange={handleChange}
+                    className="buyer-input"
+                  />
+                  {validationErrors.fullName && <span style={{ color: '#dc2626', fontSize: '12px', marginTop: '4px', display: 'block' }}>{validationErrors.fullName}</span>}
+                </div>
 
-                <label className="buyer-detail-label" htmlFor="phone">
-                  Phone Number
-                </label>
-                <input
-                  id="phone"
-                  name="phone"
-                  value={form.phone}
-                  onChange={handleChange}
-                  className="buyer-input"
-                />
+                <div>
+                  <label className="buyer-detail-label" htmlFor="phone">
+                    Phone Number
+                  </label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    value={form.phone}
+                    onChange={handleChange}
+                    className="buyer-input"
+                  />
+                  {validationErrors.phone && <span style={{ color: '#dc2626', fontSize: '12px', marginTop: '4px', display: 'block' }}>{validationErrors.phone}</span>}
+                </div>
               </div>
             ) : (
               <>

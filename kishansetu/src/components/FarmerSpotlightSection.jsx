@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/FarmerSpotlightSection.css';
-import farmerImage from '../assets/farmer.jpg';
+import farmerImage from '../assets/farmer-home-page.png';
 
 const farmerHighlights = [
   { value: '2,400+', label: 'Orders fulfilled' },
@@ -118,7 +118,7 @@ const FarmerSpotlightSection = () => {
             </div>
 
             <div className="spotlight-actions">
-              <button className="spotlight-cta" type="button">
+              {/* <button className="spotlight-cta" type="button">
                 <span>Shop from Ramesh</span>
                 <svg
                   width="18"
@@ -134,7 +134,7 @@ const FarmerSpotlightSection = () => {
                   <path d="M5 12h14" />
                   <path d="M12 5l7 7-7 7" />
                 </svg>
-              </button>
+              </button> */}
 
               <p className="spotlight-supporting-text">
                 Direct orders, same-day dispatch, and transparent farm pricing.

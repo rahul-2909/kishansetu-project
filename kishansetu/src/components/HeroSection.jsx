@@ -5,6 +5,34 @@ import heroImage from '../assets/main.jpg';
 
 const HeroSection = () => {
     const navigate = useNavigate();
+    
+    // Get user role from localStorage
+    const user = JSON.parse(localStorage.getItem('farmdirect_user') || '{}');
+    const token = localStorage.getItem('farmdirect_token');
+    const isLoggedIn = !!token;
+    const userRole = user.role;
+
+    const handleShoppingClick = () => {
+        if (!isLoggedIn) {
+            navigate("/buyer/shop");
+        } else if (userRole === 'buyer') {
+            navigate("/buyer/shop");
+        } else if (userRole === 'seller') {
+            // Seller already logged in, redirect to seller dashboard
+            navigate("/seller/dashboard");
+        }
+    };
+
+    const handleSellerClick = () => {
+        if (!isLoggedIn) {
+            navigate("/seller/dashboard");
+        } else if (userRole === 'seller') {
+            navigate("/seller/dashboard");
+        } else if (userRole === 'buyer') {
+            // Buyer already logged in, redirect to buyer shop
+            navigate("/buyer/shop");
+        }
+    };
 
     return (
         <section id="hero" className="hero">
@@ -43,7 +71,7 @@ const HeroSection = () => {
                     </p>
 
                     <div className="hero-buttons">
-                        <button className="btn btn-primary" >
+                        <button className="btn btn-primary" onClick={handleShoppingClick}>
                             <span className="btn-icon">
                                 <svg
                                     width="20"
@@ -62,7 +90,7 @@ const HeroSection = () => {
                             </span>
                             Start Shopping
                         </button>
-                        <button className="btn btn-secondary">
+                        <button className="btn btn-secondary" onClick={handleSellerClick}>
                             <span className="btn-icon">
                                 <svg
                                     width="20"
@@ -182,8 +210,8 @@ const HeroSection = () => {
                                 </svg>
                             </div>
                             <div>
-                                <strong>Same Day</strong>
-                                <span>Home delivery</span>
+                                <strong>Call now </strong>
+                                <span>Get delivery</span>
                             </div>
                         </div>
                     </div>

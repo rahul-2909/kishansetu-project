@@ -225,7 +225,7 @@ const DashboardHome = () => {
   return (
     <div className="home-container">
       
-      {/* Top Bar with Home Button */}
+      {/* Top Bar with Home Button
       <div className="home-top-bar">
         <h1 className="home-welcome">Welcome back! 👋</h1>
         <button className="home-btn" onClick={() => navigate('/')}>
@@ -235,7 +235,7 @@ const DashboardHome = () => {
           </svg>
           Home
         </button>
-      </div>
+      </div> */}
 
       <div className="stats-grid">
         {displayStats.map((stat) => (

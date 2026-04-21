@@ -1,9 +1,11 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import '../styles/SignupPage.css';
+import { useToast } from './Toast';
 
 const SignupPage = () => {
   const navigate = useNavigate();
+  const { showError, showSuccess } = useToast();
 
   const [role, setRole] = useState('buyer');
   const [form, setForm] = useState({
@@ -142,9 +144,9 @@ const SignupPage = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          fullName: form.fullName,
-          phone: form.phone,
-          email: form.email,
+          fullName: form.fullName.trim(),
+          phone: form.phone.trim(),
+          email: form.email.trim(),
           password: form.password,
           role: role
         })
@@ -157,8 +159,10 @@ const SignupPage = () => {
       }
 
       // Handle successful signup (e.g., redirect to login)
+      showSuccess('Account created successfully! Please log in.');
       navigate('/login');
     } catch (error) {
+      showError(error.message);
       setSubmitError(error.message);
     } finally {
       setIsSubmitting(false);

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import '../styles/LoginPage.css';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from './Toast';
 
 const LoginPage = () => {
   const [role, setRole] = useState('buyer');
@@ -10,11 +11,23 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const { showError, showSuccess } = useToast();
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!email || !email.includes('@')) newErrors.email = 'Valid email required';
+    if (!password || password.length < 8) newErrors.password = 'Password must be at least 8 characters';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!email || !password) return;
+    setErrors({});
+    
+    if (!validateForm()) return;
 
     setIsLoading(true);
 
@@ -25,7 +38,7 @@ const LoginPage = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: email,
+          email: email.trim(),
           password: password,
         }),
       });
@@ -36,9 +49,6 @@ const LoginPage = () => {
         throw new Error(data.message || 'Login failed');
       }
 
-      // ==========================================
-      // THE FIX: Compare Frontend Toggle vs Database Role
-      // ==========================================
       if (role !== data.user.role) {
         const wrongRole = role === 'buyer' ? 'Seller' : 'Buyer';
         throw new Error(
@@ -46,9 +56,9 @@ const LoginPage = () => {
         );
       }
 
-      // If they match, proceed with login
       localStorage.setItem('farmdirect_token', data.token);
       localStorage.setItem('farmdirect_user', JSON.stringify(data.user));
+      showSuccess('Login successful!');
 
       if (data.user.role === 'seller') {
         navigate('/seller/dashboard');
@@ -58,7 +68,7 @@ const LoginPage = () => {
 
     } catch (error) {
       console.error(error.message);
-      alert(error.message); // You can replace this with your error banner later
+      showError(error.message);
     } finally {
       setIsLoading(false);
     }

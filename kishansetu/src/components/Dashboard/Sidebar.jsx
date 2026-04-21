@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Sidebar = ({ activeMenu, setActiveMenu }) => {
+const Sidebar = ({ activeMenu, isOpen, setActiveMenu }) => {
   const menuItems = [
     { id: 'home', label: 'Dashboard', icon: '📊' },
     { id: 'products', label: 'My Products', icon: '🥕' },
@@ -10,7 +10,7 @@ const Sidebar = ({ activeMenu, setActiveMenu }) => {
   ];
 
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${isOpen ? 'sidebar-open' : ''}`}>
       <div className="sidebar-logo">
         <span className="sidebar-logo-icon">🌱</span>
         <span className="sidebar-logo-text">Kishansetu</span>

@@ -10,12 +10,22 @@ import './Dashboard.css';
 
 const FarmerDashboardPage = () => {
   const [activeMenu, setActiveMenu] = useState('home');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const handleMenuChange = (menu, options = {}) => {
+    setActiveMenu(menu);
+    setSelectedProduct(menu === 'add-product' ? options.product || null : null);
+    setIsSidebarOpen(false);
+  };
 
   const renderContent = () => {
     switch (activeMenu) {
       case 'home': return <DashboardHome />;
-      case 'products': return <Products onNavigate={setActiveMenu} />;
-      case 'add-product': return <AddProduct onNavigate={setActiveMenu} />;
+      case 'products':
+        return <Products onNavigate={handleMenuChange} onEditProduct={(product) => handleMenuChange('add-product', { product })} />;
+      case 'add-product':
+        return <AddProduct onNavigate={handleMenuChange} productToEdit={selectedProduct} />;
       case 'location': return <LocationSettings />;
       case 'profile': return <Profile />;
       default: return <DashboardHome />;
@@ -24,9 +34,24 @@ const FarmerDashboardPage = () => {
 
   return (
     <div className="dashboard-layout">
-      <Sidebar activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
+      <Sidebar
+        activeMenu={activeMenu}
+        isOpen={isSidebarOpen}
+        setActiveMenu={handleMenuChange}
+      />
+      {isSidebarOpen && (
+        <button
+          type="button"
+          className="sidebar-overlay"
+          aria-label="Close sidebar"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
       <div className="dashboard-main">
-        <Topbar />
+        <Topbar
+          isSidebarOpen={isSidebarOpen}
+          onToggleSidebar={() => setIsSidebarOpen((prev) => !prev)}
+        />
         <div className="dashboard-content">
           {renderContent()}
         </div>
