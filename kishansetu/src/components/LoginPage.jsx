@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import '../styles/LoginPage.css';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from './Toast';
+import { apiUrl } from '../config/api';
 
 const LoginPage = () => {
   const [role, setRole] = useState('buyer');
@@ -32,7 +33,7 @@ const LoginPage = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch(apiUrl('/api/auth/login'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

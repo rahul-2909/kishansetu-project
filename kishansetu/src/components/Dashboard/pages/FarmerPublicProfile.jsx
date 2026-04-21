@@ -1,6 +1,7 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './Buyer.css';
+import { apiUrl } from '../../../config/api';
 
 const FarmerPublicProfile = () => {
   const { id } = useParams();
@@ -18,7 +19,7 @@ const FarmerPublicProfile = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/buyer/sellers/${id}`, {
+      const response = await fetch(apiUrl(`/api/buyer/sellers/${id}`), {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -95,8 +96,8 @@ const FarmerPublicProfile = () => {
               <div key={index} className="public-product-item">
                 <div className="public-product-img">
                   {item.image ? (
-                    <img 
-                      src={item.image} 
+                    <img
+                      src={item.image}
                       alt={item.name}
                       className="product-image"
                       onError={(e) => {
@@ -105,7 +106,7 @@ const FarmerPublicProfile = () => {
                       }}
                     />
                   ) : null}
-                  <span 
+                  <span
                     className="product-emoji-fallback"
                     style={{ display: item.image ? 'none' : 'flex' }}
                   >

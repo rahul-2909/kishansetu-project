@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
+import { apiUrl } from '../../config/api';
 
 const LocationSettings = () => {
   const [form, setForm] = useState({
@@ -15,7 +16,7 @@ const LocationSettings = () => {
     const fetchLocation = async () => {
       try {
         const token = localStorage.getItem('farmdirect_token');
-        const response = await fetch('http://localhost:5000/api/seller/location', {
+        const response = await fetch(apiUrl('/api/seller/location'), {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const data = await response.json();
@@ -43,7 +44,7 @@ const LocationSettings = () => {
 
     try {
       const token = localStorage.getItem('farmdirect_token');
-      const response = await fetch('http://localhost:5000/api/seller/location', {
+      const response = await fetch(apiUrl('/api/seller/location'), {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',

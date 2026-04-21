@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '../Toast';
+import { apiUrl } from '../../config/api';
 
 const emptyForm = {
   name: '',
@@ -111,8 +112,8 @@ const AddProduct = ({ onNavigate, productToEdit }) => {
       }
 
       const endpoint = isEditMode
-        ? `http://localhost:5000/api/seller/products/${productToEdit._id}`
-        : 'http://localhost:5000/api/seller/products';
+        ? apiUrl(`/api/seller/products/${productToEdit._id}`)
+        : apiUrl('/api/seller/products');
 
       const response = await fetch(endpoint, {
         method: isEditMode ? 'PUT' : 'POST',

@@ -1,7 +1,8 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Buyer.css';
 import { useToast } from '../../Toast';
+import { apiUrl } from '../../../config/api';
 
 const BuyerProfile = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const BuyerProfile = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/buyer/profile', {
+      const response = await fetch(apiUrl('/api/buyer/profile'), {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -62,7 +63,7 @@ const BuyerProfile = () => {
     if (!form.fullName || form.fullName.trim().length === 0) errors.fullName = 'Full name is required';
     if (!form.phone || form.phone.trim().length === 0) errors.phone = 'Phone number is required';
     if (form.phone && !/^[6-9]\d{9}$/.test(form.phone.trim())) errors.phone = 'Enter a valid 10-digit phone number';
-    
+
     setValidationErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -77,7 +78,7 @@ const BuyerProfile = () => {
     if (!token) return;
 
     try {
-      const response = await fetch('http://localhost:5000/api/buyer/profile', {
+      const response = await fetch(apiUrl('/api/buyer/profile'), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -1,6 +1,7 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Buyer.css';
+import { apiUrl } from '../../../config/api';
 
 const categories = ['All', 'Vegetables', 'Fruits', 'Dairy', 'Grains', 'Spices', 'Organic', 'Local Produce'];
 
@@ -28,7 +29,7 @@ const BuyerShopPage = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/buyer/sellers', {
+      const response = await fetch(apiUrl('/api/buyer/sellers'), {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();

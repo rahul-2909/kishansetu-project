@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import '../styles/SignupPage.css';
 import { useToast } from './Toast';
+import { apiUrl } from '../config/api';
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -138,7 +139,7 @@ const SignupPage = () => {
 
     try {
       // Here you would make an actual API call to your backend to create the user
-      const response = await fetch('http://localhost:5000/api/auth/signup', {
+      const response = await fetch(apiUrl('/api/auth/signup'), {
         method:'POST',
         headers: {
           'Content-Type': 'application/json'

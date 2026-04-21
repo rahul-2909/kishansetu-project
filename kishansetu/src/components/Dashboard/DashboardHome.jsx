@@ -11,7 +11,7 @@
 //       try {
 //         const token = localStorage.getItem('farmdirect_token');
 
-//         const statsRes = await fetch('http://localhost:5000/api/seller/stats', {
+//         const statsRes = await fetch(apiUrl('/api/seller/stats'), {
 //           headers: { Authorization: `Bearer ${token}` }
 //         });
 
@@ -149,6 +149,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
+import { apiUrl } from '../../config/api';
 
 const DashboardHome = () => {
   const navigate = useNavigate();
@@ -161,7 +162,7 @@ const DashboardHome = () => {
       try {
         const token = localStorage.getItem('farmdirect_token');
 
-        const statsRes = await fetch('http://localhost:5000/api/seller/stats', {
+        const statsRes = await fetch(apiUrl('/api/seller/stats'), {
           headers: { Authorization: `Bearer ${token}` }
         });
 

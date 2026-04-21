@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
+import { apiUrl } from '../../config/api';
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -17,7 +18,7 @@ const Profile = () => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem('farmdirect_token');
-        const response = await fetch('http://localhost:5000/api/seller/profile', {
+        const response = await fetch(apiUrl('/api/seller/profile'), {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const data = await response.json();
@@ -44,7 +45,7 @@ const Profile = () => {
     
     try {
       const token = localStorage.getItem('farmdirect_token');
-      const response = await fetch('http://localhost:5000/api/seller/profile', {
+      const response = await fetch(apiUrl('/api/seller/profile'), {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Dashboard.css';
 import { useToast } from '../Toast';
+import { apiUrl } from '../../config/api';
 
 const Products = ({ onEditProduct }) => {
   const { showError, showSuccess, showInfo } = useToast();
@@ -13,7 +14,7 @@ const Products = ({ onEditProduct }) => {
     const fetchProducts = async () => {
       try {
         const token = localStorage.getItem('farmdirect_token');
-        const response = await fetch('http://localhost:5000/api/seller/products', {
+        const response = await fetch(apiUrl('/api/seller/products'), {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await response.json();
@@ -36,7 +37,7 @@ const Products = ({ onEditProduct }) => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem('farmdirect_token');
-      const response = await fetch(`http://localhost:5000/api/seller/products/${id}`, {
+      const response = await fetch(apiUrl(`/api/seller/products/${id}`), {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       });
