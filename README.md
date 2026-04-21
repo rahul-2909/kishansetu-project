@@ -39,7 +39,7 @@ Kishansetu/
 └── .gitignore
 ⚙️ Installation & Setup
 1️⃣ Clone the repository
-git clone https://github.com/your-username/kishansetu.git
+git clone https://github.com/rahul-2909/kishansetu.git
 cd kishansetu
 2️⃣ Setup Backend
 cd backend
