@@ -88,7 +88,7 @@ const LoginPage = () => {
           <div className="login-brand-content">
             <div className="login-brand-logo">
               <span className="brand-logo-icon">🌱</span>
-              <span className="brand-logo-text">FarmDirect</span>
+              <span className="brand-logo-text">Kishansetu</span>
             </div>
 
             <h1 className="login-brand-heading">
