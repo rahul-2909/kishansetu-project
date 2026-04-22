@@ -230,7 +230,7 @@ const SignupPage = () => {
             {/* Mobile Logo */}
             <div className="signup-mobile-logo">
               <span className="brand-logo-icon">🌱</span>
-              <span className="brand-logo-text">FarmDirect</span>
+              <span className="brand-logo-text">Kishansetu</span>
             </div>
 
             {/* Header */}
