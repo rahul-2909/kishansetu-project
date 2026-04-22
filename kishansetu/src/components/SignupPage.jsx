@@ -183,7 +183,7 @@ const SignupPage = () => {
           <div className="signup-brand-content">
             <div className="signup-brand-logo">
               <span className="brand-logo-icon">🌱</span>
-              <span className="brand-logo-text">FarmDirect</span>
+              <span className="brand-logo-text">Kishansetu</span>
             </div>
 
             <h1 className="signup-brand-heading">
