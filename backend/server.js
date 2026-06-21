@@ -6,6 +6,9 @@ const connectDB = require('./db');
 const authRoutes = require('./routes/auth');
 const sellerRoutes = require('./routes/seller');
 const buyerRoutes = require('./routes/buyer');
+const dns = require('dns');
+
+dns.setServers(['1.1.1.1', '8.8.8.8']);
 
 dotenv.config({ path: path.join(__dirname, '.env') });
 
@@ -21,24 +24,30 @@ connectDB();
 
 const app = express();
 
-const allowedOrigins = (
-  process.env.CLIENT_URLS ||
-  'http://localhost:5173,http://localhost:5174,http://localhost:5175,https://kishansetu-frontend.onrender.com'
-)
-  .split(',')
-  .map((origin) => origin.trim())
-  .filter(Boolean);
+// const allowedOrigins = (
+//   process.env.CLIENT_URLS ||
+//   'http://localhost:5173,http://localhost:5174,http://localhost:5175,https://kishansetu-frontend.onrender.com'
+// )
+//   .split(',')
+//   .map((origin) => origin.trim())
+//   .filter(Boolean);
+
+// app.use(cors({
+//   origin: (origin, callback) => {
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       return callback(null, true);
+//     }
+
+//     return callback(new Error('CORS origin not allowed'));
+//   },
+//   credentials: true
+// }));
 
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-
-    return callback(new Error('CORS origin not allowed'));
-  },
+  origin: true,
   credentials: true
 }));
+
 
 app.use(express.json());
 

@@ -23,9 +23,7 @@ const upload = multer({ storage });
 // ALL routes below require a valid JWT token
 router.use(protect);
 
-// ==========================================
 // 1. SELLER PROFILE APIS
-// ==========================================
 router.get('/profile', async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
@@ -53,9 +51,8 @@ router.put('/profile', async (req, res) => {
     }
 });
 
-// ==========================================
 // 2. SELLER LOCATION APIS
-// ==========================================
+
 router.get('/location', async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('village city state');
@@ -89,9 +86,8 @@ router.put('/location', async (req, res) => {
     }
 });
 
-// ==========================================
+
 // 3. SELLER PRODUCTS APIS
-// ==========================================
 router.get('/products', async (req, res) => {
     try {
         const products = await Product.find({ seller: req.user.id }).sort({ createdAt: -1 });
@@ -108,7 +104,7 @@ router.post('/products', upload.single('image'), async (req, res) => {
             return res.status(400).json({ message: 'No image uploaded' });
         }
 
-        const imageUrl = req.file.path; // ✅ correct for cloudinary
+        const imageUrl = req.file.path
 
         const newProduct = new Product({
             name: req.body.name,
@@ -187,9 +183,9 @@ router.delete('/products/:id', async (req, res) => {
 });
 
 
-// ==========================================
+
 // DASHBOARD HOME STATS API
-// ==========================================
+
 
 // GET /api/seller/stats
 router.get('/stats', async (req, res) => {
